@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OjekOnlineModelStoreContainer" CdmEntityContainer="OjekOnlineEntities">
+    <EntitySetMapping Name="data_diri">
+      <EntityTypeMapping TypeName="OjekOnlineModel.data_diri">
+        <MappingFragment StoreEntitySet="data_diri">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tanggal_daftar" ColumnName="tanggal_daftar" />
+          <ScalarProperty Name="nama_pengemudi" ColumnName="nama_pengemudi" />
+          <ScalarProperty Name="plat_nomor" ColumnName="plat_nomor" />
+          <ScalarProperty Name="nomor_sim" ColumnName="nomor_sim" />
+          <ScalarProperty Name="keterangan" ColumnName="keterangan" />
+          <ScalarProperty Name="minimal_jam_kerja" ColumnName="minimal_jam_kerja" />
+          <ScalarProperty Name="foto" ColumnName="foto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

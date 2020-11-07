@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ojek Online - @ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="~/Content/Dashboard/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/DataTables/DataTables-1.10.22/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/Content/DataTables/Buttons-1.6.5/css/buttons.bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/Content/DataTables/Select-1.3.1/css/select.bootstrap4.min.css" />
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="~/Content/Dashboard/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="~/Content/Dashboard/css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="~/Content/Dashboard/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="~/Content/Dashboard/css/custom.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<body>
+    <div class="page">
+        <!-- Main Navbar-->
+        <header class="header">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <!-- Navbar Header-->
+                        <div class="navbar-header">
+                            <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                                <div class="brand-text d-none d-lg-inline-block"><span>Ojek </span><strong>Online</strong></div>
+                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
+                            </a>
+                            <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                        </div>
+                        <!-- Navbar Menu -->
+                        <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                            <!-- Logout    -->
+                            <li class="nav-item"><a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="page-content d-flex align-items-stretch">
+            <!-- Side Navbar -->
+            <nav class="side-navbar">
+                <!-- Sidebar Header-->
+                <div class="sidebar-header d-flex align-items-center">
+                    <div class="avatar"><img src="~/Content/Dashboard/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
+                    <div class="title">
+                        <h1 class="h4">Enrico Feraldo K</h1>
+                        <p>Mahasiswa</p>
+                    </div>
+                </div>
+                <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+                <ul class="list-unstyled">
+                    <li class="active"><a href="@Url.Action("Index", "Dashboard")"> <i class="icon-home"></i>Home </a></li>
+                    <li><a href="@Url.Action("Index", "DataDiri")"> <i class="icon-grid"></i>Data Diri </a></li>
+                </ul>
+            </nav>
+
+            <div class="content-inner">
+                <!-- Page Header-->
+                <header class="page-header">
+                    <div class="container-fluid">
+                        <h2 class="no-margin-bottom">@ViewBag.Title</h2>
+                    </div>
+                </header>
+                @RenderBody()
+
+                <!-- Page Footer-->
+                <footer class="main-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>Enrico Feraldo K. &copy; @DateTime.Now.Year</p>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <p>Design by <b>Enrico Feraldo K.</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="~/Content/Dashboard/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/DataTables/DataTables-1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/DataTables/DataTables-1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.6.5/js/buttons.html5.min.js"></script>
+    <script src="~/Content/DataTables/Buttons-1.6.5/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Content/DataTables/Select-1.3.1/js/select.bootstrap4.min.js"></script>
+
+    <script src="~/Content/DataTables/jszip.min.js"></script>
+    <script src="~/Content/DataTables/pdfmake.min.js"></script>
+    <script src="~/Content/DataTables/vfs_fonts.js"></script>
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+
+    <script src="~/Content/Dashboard/vendor/popper.js/umd/popper.min.js"></script>
+    <script src="~/Content/Dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/Dashboard/vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="~/Content/Dashboard/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Content/Dashboard/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/Content/Dashboard/js/charts-home.js"></script>
+    <!-- Main File-->
+    <script src="~/Content/Dashboard/js/front.js"></script>
+</body>
+</html>

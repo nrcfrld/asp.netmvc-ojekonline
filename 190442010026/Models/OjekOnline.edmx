@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OjekOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="data_diri">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tanggal_daftar" Type="datetime" />
+          <Property Name="nama_pengemudi" Type="nvarchar" MaxLength="100" />
+          <Property Name="plat_nomor" Type="nvarchar" MaxLength="50" />
+          <Property Name="nomor_sim" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="keterangan" Type="nvarchar" MaxLength="100" />
+          <Property Name="minimal_jam_kerja" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="foto" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="OjekOnlineModelStoreContainer">
+          <EntitySet Name="data_diri" EntityType="Self.data_diri" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OjekOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="data_diri">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tanggal_daftar" Type="DateTime" Precision="3" />
+          <Property Name="nama_pengemudi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="plat_nomor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nomor_sim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="keterangan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="minimal_jam_kerja" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="foto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="OjekOnlineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="data_diri" EntityType="Self.data_diri" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OjekOnlineModelStoreContainer" CdmEntityContainer="OjekOnlineEntities">
+          <EntitySetMapping Name="data_diri">
+            <EntityTypeMapping TypeName="OjekOnlineModel.data_diri">
+              <MappingFragment StoreEntitySet="data_diri">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tanggal_daftar" ColumnName="tanggal_daftar" />
+                <ScalarProperty Name="nama_pengemudi" ColumnName="nama_pengemudi" />
+                <ScalarProperty Name="plat_nomor" ColumnName="plat_nomor" />
+                <ScalarProperty Name="nomor_sim" ColumnName="nomor_sim" />
+                <ScalarProperty Name="keterangan" ColumnName="keterangan" />
+                <ScalarProperty Name="minimal_jam_kerja" ColumnName="minimal_jam_kerja" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
