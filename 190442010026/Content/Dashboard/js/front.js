@@ -50,8 +50,55 @@ $(document).ready(function () {
         ],
         select: true
     });
-
     // End Untuk Data Diri
+
+    function hitungGajiPerbulan() {
+        let gaji_perjam = $("#gaji_perjam").val();
+        let jumlah_jam_perbulan = $("#jumlah_jam_perbulan").val();
+
+        $("#gaji_perbulan").val(gaji_perjam * jumlah_jam_perbulan);
+    }
+
+    function hitungTotalInsentifBulanan() {
+        let insentif_makan = $("#insentif_makan").val();
+        let insentif_bensin = $("#insentif_bensin").val();
+
+        $("#total_insentif_perbulan").val((insentif_makan * 30) + (insentif_bensin * 30));
+    }
+
+    function totalGajiPerbulan() {
+        let gaji_perbulan = $("#gaji_perbulan").val();
+        let total_insentif_perbulan = $("#total_insentif_perbulan").val();
+        let potongan = $("#potongan").val();
+
+        $("#total_gaji_perbulan").val(parseInt(gaji_perbulan) + parseInt(total_insentif_perbulan) - potongan);
+    }
+
+    $("#jumlah_jam_perbulan").on("input",function () {
+        hitungGajiPerbulan();
+        totalGajiPerbulan();
+    });
+
+    $("#potongan").on("input", function () {
+        totalGajiPerbulan();
+    });
+
+    $("#pengemudi").change(function () {
+        var id = $(this).val();
+        $.ajax({
+            url: 'Pendapatan/getPengemudi/' + id,
+            type: 'get',
+            dataType: 'json',
+            success: function (response) {
+                $("#gaji_perjam").val(response['gaji_perjam']);
+                $("#insentif_makan").val(response['insentif_makan']);
+                $("#insentif_bensin").val(response['insentif_bensin']);
+                hitungGajiPerbulan();
+                hitungTotalInsentifBulanan();
+                totalGajiPerbulan();
+            }
+        });
+    });
 
     // ------------------------------------------------------- //
     // Search Box

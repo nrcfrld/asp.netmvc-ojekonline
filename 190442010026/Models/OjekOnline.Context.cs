@@ -25,6 +25,8 @@ namespace _190442010026.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<data_diri> data_diri { get; set; }
+        public virtual DbSet<pendapatan> pendapatans { get; set; }
+        public virtual DbSet<pengemudi> pengemudis { get; set; }
+        public virtual DbSet<view_pendapatan> view_pendapatan { get; set; }
     }
 }

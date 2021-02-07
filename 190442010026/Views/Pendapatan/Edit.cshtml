@@ -1,0 +1,49 @@
+﻿@model _190442010026.Models.pendapatan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Template.cshtml";
+}
+
+<!-- Dashboard Counts Section-->
+<section class="dashboard-counts no-padding-bottom">
+    <div class="container-fluid">
+        @using (Html.BeginForm("Update", "Pendapatan", FormMethod.Post))
+        {
+            <div class="row bg-white has-shadow">
+
+                <div class="col-12">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.id)
+
+                    <div class="form-group">
+                        <label>Tanggal :</label>
+                        @Html.TextBoxFor(model => model.tanggal, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pengemudi :</label>
+                        @Html.DropDownListFor(model => model.id_pengemudi, new SelectList((System.Collections.IEnumerable)ViewData["pengemudi"], "id", "nama_pengemudi"), new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jumlah Jam Perbulan :</label>
+                        @Html.TextBoxFor(model => model.jumlah_jam_perbulan, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Potongan :</label>
+                        @Html.TextBoxFor(model => model.potongan, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-12">
+                    <a class="btn btn-light" href="@Url.Action("Index", "Pendapatan")">Kembali</a>
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('Benar akan disimpan data ini ?')">Update</button>
+                </div>
+
+            </div>
+        }
+    </div>
+</section>
+

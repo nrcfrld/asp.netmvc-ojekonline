@@ -129,14 +129,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\DataDiriController.cs" />
+    <Compile Include="Controllers\PendapatanController.cs" />
+    <Compile Include="Controllers\PengemudiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataDiri.cs" />
-    <Compile Include="Models\data_diri.cs">
-      <DependentUpon>OjekOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OjekOnline.Context.cs">
       <AutoGen>True</AutoGen>
@@ -152,6 +149,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OjekOnline.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pendapatan.cs">
+      <DependentUpon>OjekOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pengemudi.cs">
+      <DependentUpon>OjekOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\view_pendapatan.cs">
+      <DependentUpon>OjekOnline.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1175,10 +1181,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Template.cshtml" />
-    <Content Include="Views\DataDiri\Index.cshtml" />
+    <Content Include="Views\Pengemudi\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\DataDiri\Edit.cshtml" />
+    <Content Include="Views\Pengemudi\Edit.cshtml" />
+    <Content Include="Views\Pendapatan\Index.cshtml" />
+    <Content Include="Views\Pendapatan\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

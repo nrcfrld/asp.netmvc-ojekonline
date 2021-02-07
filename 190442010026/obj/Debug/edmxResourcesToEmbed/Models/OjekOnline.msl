@@ -1,17 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OjekOnlineModelStoreContainer" CdmEntityContainer="OjekOnlineEntities">
-    <EntitySetMapping Name="data_diri">
-      <EntityTypeMapping TypeName="OjekOnlineModel.data_diri">
-        <MappingFragment StoreEntitySet="data_diri">
+    <EntitySetMapping Name="pendapatans">
+      <EntityTypeMapping TypeName="OjekOnlineModel.pendapatan">
+        <MappingFragment StoreEntitySet="pendapatan">
+          <ScalarProperty Name="jumlah_jam_perbulan" ColumnName="jumlah_jam_perbulan" />
+          <ScalarProperty Name="potongan" ColumnName="potongan" />
+          <ScalarProperty Name="id_pengemudi" ColumnName="id_pengemudi" />
+          <ScalarProperty Name="tanggal" ColumnName="tanggal" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="tanggal_daftar" ColumnName="tanggal_daftar" />
-          <ScalarProperty Name="nama_pengemudi" ColumnName="nama_pengemudi" />
-          <ScalarProperty Name="plat_nomor" ColumnName="plat_nomor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pengemudis">
+      <EntityTypeMapping TypeName="OjekOnlineModel.pengemudi">
+        <MappingFragment StoreEntitySet="pengemudi">
+          <ScalarProperty Name="insentif_bensin" ColumnName="insentif_bensin" />
+          <ScalarProperty Name="insentif_makan" ColumnName="insentif_makan" />
+          <ScalarProperty Name="gaji_perjam" ColumnName="gaji_perjam" />
           <ScalarProperty Name="nomor_sim" ColumnName="nomor_sim" />
-          <ScalarProperty Name="keterangan" ColumnName="keterangan" />
-          <ScalarProperty Name="minimal_jam_kerja" ColumnName="minimal_jam_kerja" />
-          <ScalarProperty Name="foto" ColumnName="foto" />
+          <ScalarProperty Name="plat_nomor" ColumnName="plat_nomor" />
+          <ScalarProperty Name="nama_pengemudi" ColumnName="nama_pengemudi" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_pendapatan">
+      <EntityTypeMapping TypeName="OjekOnlineModel.view_pendapatan">
+        <MappingFragment StoreEntitySet="view_pendapatan">
+          <ScalarProperty Name="potongan" ColumnName="potongan" />
+          <ScalarProperty Name="total_pendapatan" ColumnName="total_pendapatan" />
+          <ScalarProperty Name="jumlah_jam_perbulan" ColumnName="jumlah_jam_perbulan" />
+          <ScalarProperty Name="insentif_bensin" ColumnName="insentif_bensin" />
+          <ScalarProperty Name="insentif_makan" ColumnName="insentif_makan" />
+          <ScalarProperty Name="gaji_perjam" ColumnName="gaji_perjam" />
+          <ScalarProperty Name="nomor_sim" ColumnName="nomor_sim" />
+          <ScalarProperty Name="nama_pengemudi" ColumnName="nama_pengemudi" />
+          <ScalarProperty Name="id_pengemudi" ColumnName="id_pengemudi" />
+          <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+          <ScalarProperty Name="id_pendapatan" ColumnName="id_pendapatan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

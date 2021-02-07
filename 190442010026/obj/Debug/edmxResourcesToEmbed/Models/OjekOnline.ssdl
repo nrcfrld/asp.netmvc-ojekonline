@@ -1,19 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="OjekOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="data_diri">
+  <EntityType Name="pendapatan">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="tanggal_daftar" Type="datetime" />
+    <Property Name="tanggal" Type="date" />
+    <Property Name="id_pengemudi" Type="int" />
+    <Property Name="potongan" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="jumlah_jam_perbulan" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="pengemudi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nama_pengemudi" Type="nvarchar" MaxLength="100" />
     <Property Name="plat_nomor" Type="nvarchar" MaxLength="50" />
     <Property Name="nomor_sim" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="keterangan" Type="nvarchar" MaxLength="100" />
-    <Property Name="minimal_jam_kerja" Type="numeric" Precision="18" Scale="2" />
-    <Property Name="foto" Type="nvarchar" MaxLength="100" />
+    <Property Name="gaji_perjam" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="insentif_makan" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="insentif_bensin" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OjekOnline.dbo.view_pendapatan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="view_pendapatan">
+    <Key>
+      <PropertyRef Name="id_pendapatan" />
+      <PropertyRef Name="id_pengemudi" />
+      <PropertyRef Name="nomor_sim" />
+    </Key>
+    <Property Name="id_pendapatan" Type="int" Nullable="false" />
+    <Property Name="tanggal" Type="date" />
+    <Property Name="id_pengemudi" Type="int" Nullable="false" />
+    <Property Name="nama_pengemudi" Type="nvarchar" MaxLength="100" />
+    <Property Name="nomor_sim" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gaji_perjam" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="insentif_makan" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="insentif_bensin" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="jumlah_jam_perbulan" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="total_pendapatan" Type="numeric" Precision="38" Scale="4" />
+    <Property Name="potongan" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_pendapatan_pengemudi">
+    <End Role="pengemudi" Type="Self.pengemudi" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="pendapatan" Type="Self.pendapatan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pengemudi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pendapatan">
+        <PropertyRef Name="id_pengemudi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="OjekOnlineModelStoreContainer">
-    <EntitySet Name="data_diri" EntityType="Self.data_diri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pendapatan" EntityType="Self.pendapatan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pengemudi" EntityType="Self.pengemudi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="view_pendapatan" EntityType="Self.view_pendapatan" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [view_pendapatan].[id_pendapatan] AS [id_pendapatan], 
+    [view_pendapatan].[tanggal] AS [tanggal], 
+    [view_pendapatan].[id_pengemudi] AS [id_pengemudi], 
+    [view_pendapatan].[nama_pengemudi] AS [nama_pengemudi], 
+    [view_pendapatan].[nomor_sim] AS [nomor_sim], 
+    [view_pendapatan].[gaji_perjam] AS [gaji_perjam], 
+    [view_pendapatan].[insentif_makan] AS [insentif_makan], 
+    [view_pendapatan].[insentif_bensin] AS [insentif_bensin], 
+    [view_pendapatan].[jumlah_jam_perbulan] AS [jumlah_jam_perbulan], 
+    [view_pendapatan].[total_pendapatan] AS [total_pendapatan], 
+    [view_pendapatan].[potongan] AS [potongan]
+    FROM [dbo].[view_pendapatan] AS [view_pendapatan]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_pendapatan_pengemudi" Association="Self.FK_pendapatan_pengemudi">
+      <End Role="pengemudi" EntitySet="pengemudi" />
+      <End Role="pendapatan" EntitySet="pendapatan" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

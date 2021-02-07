@@ -1,19 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="OjekOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="data_diri">
+  <EntityContainer Name="OjekOnlineEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="pendapatans" EntityType="OjekOnlineModel.pendapatan" />
+    <EntitySet Name="pengemudis" EntityType="OjekOnlineModel.pengemudi" />
+    <EntitySet Name="view_pendapatan" EntityType="OjekOnlineModel.view_pendapatan" />
+    <AssociationSet Name="FK_pendapatan_pengemudi" Association="OjekOnlineModel.FK_pendapatan_pengemudi">
+      <End Role="pengemudi" EntitySet="pengemudis" />
+      <End Role="pendapatan" EntitySet="pendapatans" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="pendapatan">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="tanggal_daftar" Type="DateTime" Precision="3" />
+    <Property Name="tanggal" Type="DateTime" Precision="0" />
+    <Property Name="id_pengemudi" Type="Int32" />
+    <Property Name="potongan" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="jumlah_jam_perbulan" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="pengemudi" Relationship="OjekOnlineModel.FK_pendapatan_pengemudi" FromRole="pendapatan" ToRole="pengemudi" />
+  </EntityType>
+  <EntityType Name="pengemudi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nama_pengemudi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="plat_nomor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="nomor_sim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="keterangan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="minimal_jam_kerja" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="foto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="nomor_sim" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="gaji_perjam" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="insentif_makan" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="insentif_bensin" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="pendapatans" Relationship="OjekOnlineModel.FK_pendapatan_pengemudi" FromRole="pengemudi" ToRole="pendapatan" />
   </EntityType>
-  <EntityContainer Name="OjekOnlineEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="data_diri" EntityType="Self.data_diri" />
-  </EntityContainer>
+  <EntityType Name="view_pendapatan">
+    <Key>
+      <PropertyRef Name="id_pendapatan" />
+      <PropertyRef Name="id_pengemudi" />
+      <PropertyRef Name="nomor_sim" />
+    </Key>
+    <Property Name="id_pendapatan" Type="Int32" Nullable="false" />
+    <Property Name="tanggal" Type="DateTime" Precision="0" />
+    <Property Name="id_pengemudi" Type="Int32" Nullable="false" />
+    <Property Name="nama_pengemudi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="nomor_sim" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="gaji_perjam" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="insentif_makan" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="insentif_bensin" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="jumlah_jam_perbulan" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="total_pendapatan" Type="Decimal" Precision="38" Scale="4" />
+    <Property Name="potongan" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_pendapatan_pengemudi">
+    <End Type="OjekOnlineModel.pengemudi" Role="pengemudi" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="OjekOnlineModel.pendapatan" Role="pendapatan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pengemudi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pendapatan">
+        <PropertyRef Name="id_pengemudi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

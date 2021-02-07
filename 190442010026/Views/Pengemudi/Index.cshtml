@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Data Diri";
+    ViewBag.Title = "Pengemudi";
     Layout = "~/Views/Shared/Template.cshtml";
 
     int no = 1;
@@ -8,22 +8,17 @@
 
 <!-- Modal -->
 <div class="modal fade" id="addDataDiriModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    @using (Html.BeginForm("Create", "DataDiri", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Create", "Pengemudi", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Pengemudi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Tanggal Daftar :</label>
-                        @Html.TextBox("tanggal_daftar", "", new { @class = "form-control", type = "datetime-local" })
-                    </div>
-
                     <div class="form-group">
                         <label>Nama Pengemudi :</label>
                         @Html.TextBox("nama_pengemudi", "", new { @class = "form-control" })
@@ -40,23 +35,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Keterangan :</label>
-                        @Html.TextArea("keterangan", "", new { @class = "ckeditor" })
+                        <label>Gaji Perjam :</label>
+                        @Html.TextBox("gaji_perjam", "", new { @class = "form-control", type = "number" })
                     </div>
 
                     <div class="form-group">
-                        <label>Minimal Jam Kerja :</label>
-                        @Html.TextBox("minimal_jam_kerja", "", new { @class = "form-control", type="number" })
+                        <label>Insentif Makan :</label>
+                        @Html.TextBox("insentif_makan", "", new { @class = "form-control", type = "number" })
                     </div>
 
                     <div class="form-group">
-                        <label>Gambar</label>
-                        <div class="custom-file">
-                            @Html.TextBox("gambar", "", new { type = "file", @class = "custom-file-input", accept = "image/*", id = "gambar" })
-                            <label class="custom-file-label" for="gambar">Pilih Gambar</label>
-                        </div>
+                        <label>Insentif Bensin :</label>
+                        @Html.TextBox("insentif_bensin", "", new { @class = "form-control", type = "number" })
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -77,13 +68,12 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Tanggal Daftar</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Plat Nomor</th>
                                 <th scope="col">Nomor SIM</th>
-                                <th scope="col">Keterangan</th>
-                                <th scope="col">Min. Jam Kerja</th>
-                                <th scope="col" class="noExport">Foto</th>
+                                <th scope="col">Gaji Perjam</th>
+                                <th scope="col">Insentif Makan</th>
+                                <th scope="col">Insentif Bensin</th>
                                 <th scope="col" class="noExport">Aksi</th>
                             </tr>
                         </thead>
@@ -92,16 +82,15 @@
                             {
                                 <tr>
                                     <td>@no</td>
-                                    <td>@Html.Encode(dd.tanggal_daftar)</td>
                                     <td>@Html.Encode(dd.nama_pengemudi)</td>
                                     <td>@Html.Encode(dd.plat_nomor)</td>
                                     <td>@Html.Encode(dd.nomor_sim)</td>
-                                    <td>@Html.Raw(dd.keterangan)</td>
-                                    <td>@Html.Encode(dd.minimal_jam_kerja) Jam</td>
-                                    <td><img src="@Url.Content(Html.Encode(dd.foto))" alt="@Html.Encode(dd.nama_pengemudi)" width="100%" class="img-thumbnail" /></td>
+                                    <td>@Html.Encode(dd.gaji_perjam)</td>
+                                    <td>@Html.Encode(dd.insentif_makan)</td>
+                                    <td>@Html.Encode(dd.insentif_bensin)</td>
                                     <td class="text-center text-nowrap">
-                                        @Html.ActionLink("Edit", "Edit", "DataDiri", new { id = dd.id }, new{ @class = "btn btn-primary" })
-                                        @Html.ActionLink("Delete", "Delete", "DataDiri", new { id = dd.id }, new { @class = "btn btn-danger", onclick="return confirm('Apakah anda yakin menghapus data ini ?')" })
+                                        @Html.ActionLink("Edit", "Edit", "Pengemudi", new { id = dd.id }, new{ @class = "btn btn-primary" })
+                                        @Html.ActionLink("Delete", "Delete", "Pengemudi", new { id = dd.id }, new { @class = "btn btn-danger", onclick="return confirm('Apakah anda yakin menghapus data ini ?')" })
                                     </td>
                                 </tr>
                                 no++;

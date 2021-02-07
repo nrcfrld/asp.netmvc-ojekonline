@@ -4,61 +4,199 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OjekOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="data_diri">
+    <Schema Namespace="OjekOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="pendapatan">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tanggal_daftar" Type="datetime" />
+          <Property Name="tanggal" Type="date" />
+          <Property Name="id_pengemudi" Type="int" />
+          <Property Name="potongan" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="jumlah_jam_perbulan" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="pengemudi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nama_pengemudi" Type="nvarchar" MaxLength="100" />
           <Property Name="plat_nomor" Type="nvarchar" MaxLength="50" />
           <Property Name="nomor_sim" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="keterangan" Type="nvarchar" MaxLength="100" />
-          <Property Name="minimal_jam_kerja" Type="numeric" Precision="18" Scale="2" />
-          <Property Name="foto" Type="nvarchar" MaxLength="100" />
+          <Property Name="gaji_perjam" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="insentif_makan" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="insentif_bensin" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OjekOnline.dbo.view_pendapatan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_pendapatan">
+          <Key>
+            <PropertyRef Name="id_pendapatan" />
+            <PropertyRef Name="id_pengemudi" />
+            <PropertyRef Name="nomor_sim" />
+          </Key>
+          <Property Name="id_pendapatan" Type="int" Nullable="false" />
+          <Property Name="tanggal" Type="date" />
+          <Property Name="id_pengemudi" Type="int" Nullable="false" />
+          <Property Name="nama_pengemudi" Type="nvarchar" MaxLength="100" />
+          <Property Name="nomor_sim" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="gaji_perjam" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="insentif_makan" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="insentif_bensin" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="jumlah_jam_perbulan" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="total_pendapatan" Type="numeric" Precision="38" Scale="4" />
+          <Property Name="potongan" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_pendapatan_pengemudi">
+          <End Role="pengemudi" Type="Self.pengemudi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="pendapatan" Type="Self.pendapatan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pengemudi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pendapatan">
+              <PropertyRef Name="id_pengemudi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="OjekOnlineModelStoreContainer">
-          <EntitySet Name="data_diri" EntityType="Self.data_diri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pendapatan" EntityType="Self.pendapatan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pengemudi" EntityType="Self.pengemudi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_pendapatan" EntityType="Self.view_pendapatan" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_pendapatan].[id_pendapatan] AS [id_pendapatan], 
+    [view_pendapatan].[tanggal] AS [tanggal], 
+    [view_pendapatan].[id_pengemudi] AS [id_pengemudi], 
+    [view_pendapatan].[nama_pengemudi] AS [nama_pengemudi], 
+    [view_pendapatan].[nomor_sim] AS [nomor_sim], 
+    [view_pendapatan].[gaji_perjam] AS [gaji_perjam], 
+    [view_pendapatan].[insentif_makan] AS [insentif_makan], 
+    [view_pendapatan].[insentif_bensin] AS [insentif_bensin], 
+    [view_pendapatan].[jumlah_jam_perbulan] AS [jumlah_jam_perbulan], 
+    [view_pendapatan].[total_pendapatan] AS [total_pendapatan], 
+    [view_pendapatan].[potongan] AS [potongan]
+    FROM [dbo].[view_pendapatan] AS [view_pendapatan]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_pendapatan_pengemudi" Association="Self.FK_pendapatan_pengemudi">
+            <End Role="pengemudi" EntitySet="pengemudi" />
+            <End Role="pendapatan" EntitySet="pendapatan" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OjekOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="data_diri">
+        <EntityContainer Name="OjekOnlineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="pendapatans" EntityType="OjekOnlineModel.pendapatan" />
+          <EntitySet Name="pengemudis" EntityType="OjekOnlineModel.pengemudi" />
+          <EntitySet Name="view_pendapatan" EntityType="OjekOnlineModel.view_pendapatan" />
+          <AssociationSet Name="FK_pendapatan_pengemudi" Association="OjekOnlineModel.FK_pendapatan_pengemudi">
+            <End Role="pengemudi" EntitySet="pengemudis" />
+            <End Role="pendapatan" EntitySet="pendapatans" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="pendapatan">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tanggal_daftar" Type="DateTime" Precision="3" />
+          <Property Name="tanggal" Type="DateTime" Precision="0" />
+          <Property Name="id_pengemudi" Type="Int32" />
+          <Property Name="potongan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="jumlah_jam_perbulan" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="pengemudi" Relationship="OjekOnlineModel.FK_pendapatan_pengemudi" FromRole="pendapatan" ToRole="pengemudi" />
+        </EntityType>
+        <EntityType Name="pengemudi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nama_pengemudi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="plat_nomor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="nomor_sim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="keterangan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="minimal_jam_kerja" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="foto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="nomor_sim" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gaji_perjam" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="insentif_makan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="insentif_bensin" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="pendapatans" Relationship="OjekOnlineModel.FK_pendapatan_pengemudi" FromRole="pengemudi" ToRole="pendapatan" />
         </EntityType>
-        <EntityContainer Name="OjekOnlineEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="data_diri" EntityType="Self.data_diri" />
-        </EntityContainer>
+        <EntityType Name="view_pendapatan">
+          <Key>
+            <PropertyRef Name="id_pendapatan" />
+            <PropertyRef Name="id_pengemudi" />
+            <PropertyRef Name="nomor_sim" />
+          </Key>
+          <Property Name="id_pendapatan" Type="Int32" Nullable="false" />
+          <Property Name="tanggal" Type="DateTime" Precision="0" />
+          <Property Name="id_pengemudi" Type="Int32" Nullable="false" />
+          <Property Name="nama_pengemudi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="nomor_sim" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gaji_perjam" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="insentif_makan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="insentif_bensin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="jumlah_jam_perbulan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="total_pendapatan" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="potongan" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_pendapatan_pengemudi">
+          <End Type="OjekOnlineModel.pengemudi" Role="pengemudi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="OjekOnlineModel.pendapatan" Role="pendapatan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pengemudi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pendapatan">
+              <PropertyRef Name="id_pengemudi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OjekOnlineModelStoreContainer" CdmEntityContainer="OjekOnlineEntities">
-          <EntitySetMapping Name="data_diri">
-            <EntityTypeMapping TypeName="OjekOnlineModel.data_diri">
-              <MappingFragment StoreEntitySet="data_diri">
+          <EntitySetMapping Name="pendapatans">
+            <EntityTypeMapping TypeName="OjekOnlineModel.pendapatan">
+              <MappingFragment StoreEntitySet="pendapatan">
+                <ScalarProperty Name="jumlah_jam_perbulan" ColumnName="jumlah_jam_perbulan" />
+                <ScalarProperty Name="potongan" ColumnName="potongan" />
+                <ScalarProperty Name="id_pengemudi" ColumnName="id_pengemudi" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="tanggal_daftar" ColumnName="tanggal_daftar" />
-                <ScalarProperty Name="nama_pengemudi" ColumnName="nama_pengemudi" />
-                <ScalarProperty Name="plat_nomor" ColumnName="plat_nomor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pengemudis">
+            <EntityTypeMapping TypeName="OjekOnlineModel.pengemudi">
+              <MappingFragment StoreEntitySet="pengemudi">
+                <ScalarProperty Name="insentif_bensin" ColumnName="insentif_bensin" />
+                <ScalarProperty Name="insentif_makan" ColumnName="insentif_makan" />
+                <ScalarProperty Name="gaji_perjam" ColumnName="gaji_perjam" />
                 <ScalarProperty Name="nomor_sim" ColumnName="nomor_sim" />
-                <ScalarProperty Name="keterangan" ColumnName="keterangan" />
-                <ScalarProperty Name="minimal_jam_kerja" ColumnName="minimal_jam_kerja" />
-                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="plat_nomor" ColumnName="plat_nomor" />
+                <ScalarProperty Name="nama_pengemudi" ColumnName="nama_pengemudi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_pendapatan">
+            <EntityTypeMapping TypeName="OjekOnlineModel.view_pendapatan">
+              <MappingFragment StoreEntitySet="view_pendapatan">
+                <ScalarProperty Name="potongan" ColumnName="potongan" />
+                <ScalarProperty Name="total_pendapatan" ColumnName="total_pendapatan" />
+                <ScalarProperty Name="jumlah_jam_perbulan" ColumnName="jumlah_jam_perbulan" />
+                <ScalarProperty Name="insentif_bensin" ColumnName="insentif_bensin" />
+                <ScalarProperty Name="insentif_makan" ColumnName="insentif_makan" />
+                <ScalarProperty Name="gaji_perjam" ColumnName="gaji_perjam" />
+                <ScalarProperty Name="nomor_sim" ColumnName="nomor_sim" />
+                <ScalarProperty Name="nama_pengemudi" ColumnName="nama_pengemudi" />
+                <ScalarProperty Name="id_pengemudi" ColumnName="id_pengemudi" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="id_pendapatan" ColumnName="id_pendapatan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

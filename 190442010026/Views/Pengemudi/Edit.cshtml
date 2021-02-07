@@ -1,14 +1,14 @@
-﻿@model _190442010026.Models.data_diri
+﻿@model _190442010026.Models.pengemudi
 
 @{
-    ViewBag.Title = "Edit Data Diri";
+    ViewBag.Title = "Edit Pengemudi";
     Layout = "~/Views/Shared/Template.cshtml";
 }
 
 <!-- Dashboard Counts Section-->
 <section class="dashboard-counts no-padding-bottom">
     <div class="container-fluid">
-        @using (Html.BeginForm("Update", "DataDiri", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Update", "Pengemudi", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="row bg-white has-shadow">
 
@@ -16,12 +16,6 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     @Html.HiddenFor(model => model.id)
-
-                    <div class="form-group">
-                        <label>Tanggal Daftar :</label>
-                        <span class="text-success">@Model.tanggal_daftar</span>
-                        @Html.TextBoxFor(model => model.tanggal_daftar, new { @class = "form-control" })
-                    </div>
 
                     <div class="form-group">
                         <label>Nama Pengemudi :</label>
@@ -39,30 +33,22 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Keterangan :</label>
-                        @Html.TextAreaFor(model => model.keterangan, new { @class = "ckeditor" })
+                        <label>Gaji Perjam :</label>
+                        @Html.TextBoxFor(model => model.gaji_perjam, new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">
-                        <label>Minimal Jam Kerja :</label>
-                        @Html.TextBoxFor(model => model.minimal_jam_kerja, new { @class = "form-control" })
+                        <label>Insentif Makan :</label>
+                        @Html.TextBoxFor(model => model.insentif_makan, new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">
-                        <label>Gambar</label>
-                        <div class="custom-file">
-                            @Html.TextBoxFor(model => model.foto, new { type = "file", @class = "custom-file-input", accept = "image/*", id = "gambar" })
-                            <label class="custom-file-label" for="gambar">Pilih Gambar</label>
-                        </div>
+                        <label>Insentif Bensin :</label>
+                        @Html.TextBoxFor(model => model.insentif_bensin, new { @class = "form-control" })
                     </div>
-
-                    <div class="form-group">
-                        <img src="@Url.Content(Model.foto)" alt="@Model.nama_pengemudi" width="20%" class="img-thumbnail" />
-                    </div>
-
                 </div>
                 <div class="col-12">
-                    <button type="reset" class="btn btn-secondary">Batal</button>
+                    <a class="btn btn-light" href="@Url.Action("Index", "Pengemudi")">Kembali</a>
                     <button type="submit" class="btn btn-primary" onclick="return confirm('Benar akan disimpan data ini ?')">Update</button>
                 </div>
 

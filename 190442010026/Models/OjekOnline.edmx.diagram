@@ -5,7 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e84777309e1b4c5eabcf86809fc2556a" Name="Diagram1">
-        <EntityTypeShape EntityType="OjekOnlineModel.data_diri" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OjekOnlineModel.pendapatan" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OjekOnlineModel.pengemudi" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OjekOnlineModel.view_pendapatan" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="OjekOnlineModel.FK_pendapatan_pengemudi" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
